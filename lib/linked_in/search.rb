@@ -4,6 +4,7 @@ module LinkedIn
 
     def search(options={})
       path = "/people-search"
+      path +=":(people:(#{options[:fields].map{ |f| f.to_s.gsub("_","-") }.join(',')}))" if options[:fields]
 
       options = { :keywords => options } if options.is_a?(String)
       options = format_options_for_query(options)
